@@ -1,6 +1,6 @@
 package com.testgradle.emt.Configuration;
 import com.testgradle.emt.Repository.UserRepository;
-import com.testgradle.emt.Services.CustomUserDetailsService;
+import com.testgradle.emt.Services.ServiceInterface.CustomUserDetailsService;
 import com.testgradle.emt.Services.Security.JwtAuthenticationEntryPoint;
 import com.testgradle.emt.Services.Security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
@@ -64,12 +63,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
-                .antMatchers("/verifyemail").permitAll()
+                .antMatchers("/check_verified").permitAll()
                 .antMatchers("/sign_up").permitAll()
                 .antMatchers("/user/exists").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/verify").permitAll()
-                .antMatchers("/passwordreset").permitAll()
+                .antMatchers("/reset_password").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

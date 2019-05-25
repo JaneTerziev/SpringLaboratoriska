@@ -14,24 +14,28 @@ import java.util.stream.Collectors;
 public class UserPrincipal implements UserDetails {
 
     private int id;
+
     private String userName;
+
     private boolean verified;
 
-    @JsonIgnore
     private String email;
+
+    private String department;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(int id, String username, String email, String password,boolean verified, Collection<? extends GrantedAuthority> authorities) {
+    private UserPrincipal(int id, String username, String email, String password,boolean verified,String department,Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.userName = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
         this.verified=verified;
+        this.department=department;
     }
     public static UserPrincipal create(User user) {
         List<GrantedAuthority> authorities = user.getRoles()
@@ -45,6 +49,7 @@ public class UserPrincipal implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.getVerified(),
+                user.getDepartment(),
                 authorities
         );
     }
@@ -112,5 +117,13 @@ public class UserPrincipal implements UserDetails {
     public int hashCode() {
 
         return Objects.hash(id);
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

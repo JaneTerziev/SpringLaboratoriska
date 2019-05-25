@@ -1,16 +1,11 @@
 package com.testgradle.emt.Services.Impl;
-
 import com.testgradle.emt.Model.EmailToken;
 import com.testgradle.emt.Model.User;
 import com.testgradle.emt.Repository.EmailTokenRepository;
-import com.testgradle.emt.Repository.UserRepository;
-import com.testgradle.emt.Services.TokenService;
+import com.testgradle.emt.Services.ServiceInterface.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -37,8 +32,7 @@ public class TokenServiceImpl implements TokenService {
     public User findUserByToken(String token)
     {
         EmailToken tokenuser = emailTokenRepository.findByToken(token);
-        User user = tokenuser.getUser();
-        return user;
+        return tokenuser.getUser();
     }
     @Override
     public void deleteToken(String token)

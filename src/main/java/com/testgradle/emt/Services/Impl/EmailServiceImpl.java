@@ -1,6 +1,6 @@
 package com.testgradle.emt.Services.Impl;
 
-import com.testgradle.emt.Services.EmailService;
+import com.testgradle.emt.Services.ServiceInterface.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

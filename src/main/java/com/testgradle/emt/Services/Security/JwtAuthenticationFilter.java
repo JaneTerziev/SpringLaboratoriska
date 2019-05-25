@@ -1,5 +1,5 @@
 package com.testgradle.emt.Services.Security;
-import com.testgradle.emt.Services.CustomUserDetailsService;
+import com.testgradle.emt.Services.ServiceInterface.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

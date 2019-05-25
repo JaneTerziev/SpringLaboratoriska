@@ -29,10 +29,20 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    @Column(name="department")
+    private String department;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public User(String email, String password, String userName) {
         this.email = email;

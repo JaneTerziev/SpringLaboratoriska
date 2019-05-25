@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center align-items-center container ">
+  <mdb-card>
+
+    <mdb-card-header class="info-color white-text text-center py-4">
+      <h5>
+        <strong>Register</strong>
+      </h5>
+    </mdb-card-header>
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5 pt-0">
+      <!-- Form -->
+      <form class="text-center" [formGroup]="user"(ngSubmit)="Register()">
+        <div class="form-row">
+          <div class="col">
+            <!-- First name -->
+            <div class="md-form">
+              <input type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput  formControlName="userName"
+                     [ngClass]="{ 'is-invalid': activateValidators && Form.userName.errors }">
+              <label for="materialRegisterFormFirstName">Username</label>
+              <div *ngIf="activateValidators && Form.userName.errors " class="invalid-feedback">
+                <div *ngIf="Form.userName.errors.required">Username is required!</div>
+              </div>
+              <div *ngIf="this.errorHandlingService.userAlreadyExistsError">
+                <div style="font-size: 0.8em;color:#dc3545;">Username already exists!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- E-mail -->
+        <div class="md-form mt-0">
+          <input type="email" id="materialRegisterFormEmail"  class="form-control" mdbInput formControlName="email"
+                 [ngClass]="{ 'is-invalid': activateValidators && Form.email.errors }">
+          <label for="materialRegisterFormEmail">E-mail</label>
+          <div *ngIf="activateValidators && Form.email.errors " class="invalid-feedback">
+            <div *ngIf="Form.email.errors.required">Email is required!</div>
+          </div>
+          <div *ngIf="this.errorHandlingService.emailAlreadyExists">
+            <div style="font-size: 0.8em;color:#dc3545;">Email already exists!</div>
+          </div>
+        </div>
+        <!-- Password -->
+        <div class="md-form">
+          <input type="password" id="materialRegisterFormPassword"  class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+                 mdbInput formControlName="password" [ngClass]="{ 'is-invalid': activateValidators && Form.password.errors }">
+          <div *ngIf="activateValidators && Form.password.errors " class="invalid-feedback">
+            <div *ngIf="Form.password.errors.required">Password is required!</div>
+          </div>
+          <label for="materialRegisterFormPassword">Password</label>
+        </div>
+        <!-- Sign up button -->
+        <div>
+          <div class="md-form">
+            <input type="text" id="materialRegisterFormDepartment" class="form-control" mdbInput  formControlName="department"
+                   [ngClass]="{ 'is-invalid': activateValidators && Form.department.errors }">
+            <label for="materialRegisterFormDepartment">Department</label>
+            <div *ngIf="activateValidators && Form.department.errors " class="invalid-feedback">
+              <div *ngIf="Form.department.errors.required">Department is required!</div>
+            </div>
+          </div>
+          <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect
+                  type="submit" *ngIf="!submitted">Sign up</button>
+
+          <button class="btn btn-primary" type="button" disabled *ngIf="loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+        </div>
+
+        <!-- Social register -->
+
+      </form>
+      <!-- Form -->
+
+    </mdb-card-body>
+
+  </mdb-card>
+</div>
+<!-- Material form register -->

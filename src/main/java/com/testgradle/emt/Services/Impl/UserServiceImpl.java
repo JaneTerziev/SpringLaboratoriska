@@ -3,7 +3,7 @@ import com.testgradle.emt.Model.Role;
 import com.testgradle.emt.Model.User;
 import com.testgradle.emt.Repository.RolesRepository;
 import com.testgradle.emt.Repository.UserRepository;
-import com.testgradle.emt.Services.UserService;
+import com.testgradle.emt.Services.ServiceInterface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,19 +37,11 @@ public class UserServiceImpl implements UserService {
     public Collection<User> getAllUsers(){
         return userRepository.findAll().stream().collect(Collectors.toList());
     }
+
     @Override
-    public List<User> getUserByRole(String role) {
-        Collection<Role> roles = Arrays.asList(rolesRepository.findByRole(role));
-        return userRepository.findByRoles(roles);
-    }
-    @Override
-    public void editUser(int id, String email, String password, String userName) throws Exception {
+    public void editUser(String userName, String email, int id) throws Exception {
         User us = userRepository.findById(id).orElseThrow(Exception::new);
         us.setEmail(email);
-        if(!password.equals("")) {
-            String p = passwordEncoder.encode(password);
-            us.setPassword(p);
-        }
         us.setUserName(userName);
         userRepository.save(us);
     }
@@ -62,22 +54,6 @@ public class UserServiceImpl implements UserService {
     public boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
 
-    }
-    @Override
-    public User findByUsername(String username)
-    {
-        User user = userRepository.findByUserName(username);
-        if(user==null)
-        {
-            return null;
-        }
-        return user;
-    }
-    @Override
-    public int findUserId(User user)
-    {
-        User tmp = userRepository.findByUserName(user.getUserName());
-        return tmp.getId();
     }
     @Override
     public void setVerified(User user)

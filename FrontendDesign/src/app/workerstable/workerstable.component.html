@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form">
+        <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+        <label for="search">Search</label>
+      </div>
+    </div>
+  </div>
+  <table mdbTable  #tableEl="mdbTable" class="z-depth-1" id="dtBasicExample">
+    <thead>
+    <tr>
+      <th [mdbTableSort]="users" sortBy="employeeId">ID</th>
+      <th [mdbTableSort]="users" sortBy="employeeName">Full Name</th>
+      <th [mdbTableSort]="users" sortBy="employeeAge">Age</th>
+      <th [mdbTableSort]="users" sortBy="employeeSalary">Salary</th>
+      <th [mdbTableSort]="users" sortBy="employeeDepartment">Department</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let el of users;let i = index">
+      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.employeeId}}</td>
+      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.employeeName}}</td>
+      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="red-text">{{el.employeeAge}}</td>
+      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.employeeSalary}}</td>
+      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.employeeDepartment}}</td>
+      <td><a class="btn btn-primary" (click)="EditEmployee(el.employeeId,el.employeeName,el.employeeAge,el.employeeSalary,el.employeeDepartment)">Edit</a>
+      <a class="btn btn-danger" (click)="DeleteEmployee(el.employeeId)">Delete</a></td>
+    </tr>
+    </tbody>
+    <tfoot class="grey lighten-5 w-100">
+    <tr>
+      <td colspan="6">
+        <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="users"></mdb-table-pagination>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+  <app-editemployee id="target"></app-editemployee>
+</div>
+

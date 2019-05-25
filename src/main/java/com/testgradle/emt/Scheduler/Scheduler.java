@@ -1,9 +1,8 @@
 package com.testgradle.emt.Scheduler;
 
 import com.testgradle.emt.Model.EmailToken;
-import com.testgradle.emt.Model.User;
-import com.testgradle.emt.Services.TokenService;
-import com.testgradle.emt.Services.UserService;
+import com.testgradle.emt.Services.ServiceInterface.TokenService;
+import com.testgradle.emt.Services.ServiceInterface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
